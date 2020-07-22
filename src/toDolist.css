@@ -1,0 +1,92 @@
+.todoListMain .header input {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #FFF;
+}
+
+input.feldValue{
+    width: 500px;
+}
+.todoListMain .header button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #0066FF;
+    color: #FFF;
+    border: 2px solid #0066FF;
+    width: 524px;
+    margin-left: 14px;
+    margin-bottom: 19px;
+    margin-top: 22px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+.todoListMain .header button:hover {
+    background-color: #003399;
+    border: 2px solid #003399;
+    cursor: pointer;
+}
+.todoListMain .theList {
+    list-style: none;
+    padding-left: 0;
+
+}
+.todoListMain .theList li {
+    color: #333;
+    background-color: rgba(255,255,255,.5);
+    margin-bottom: 15px;
+    border-radius: 5px;
+
+}
+ul.theList {
+    width: 897px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+div.delete{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -19px;
+}
+
+button.deleteButton{
+    border-radius: 4px;
+    width: 15px;
+
+}
+label.info{
+    font-family: 'Poppins', sans-serif;
+    color: #1a0f00;
+}
+
+div.header{
+    background: #e6f0ff;
+    width: 555px;
+}
+
+div.textValue{
+    margin-top: 10px;
+    margin-left: 14px;
+}
+
+div.labelValue{
+    padding-top: 17px;
+    margin-left: 16px;
+}
+
+button.add{
+    background: #261a0d;
+}
+
+div.gender{
+    padding-top: 17px;
+    margin-left: 9px;
+}
+
+.invalid{
+    border:1px solid #ff0000
+}
+

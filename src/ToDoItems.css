@@ -1,0 +1,32 @@
+div.headerItems{
+    background: #e6f0ff;
+    width: 439px;
+}
+
+div.maineCard{
+    display: flex;
+}
+
+div.deleteLogo{
+    display: flex;
+    justify-content: flex-end;
+}
+
+i:hover {
+
+    border: #003399;
+    cursor: pointer;
+}
+
+ol.card{
+    width: 281px;
+    margin-top: -103px;
+    padding-bottom: 18px;
+    list-style:none;
+    margin-left: 100px;
+}
+
+img.imageCard{
+    width: 100px;
+    padding-left: 16px;
+}
