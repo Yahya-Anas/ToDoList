@@ -5,6 +5,7 @@ div.headerItems{
 
 div.maineCard{
     display: flex;
+    margin: .5rem;
 }
 
 div.deleteLogo{

@@ -1,109 +1,123 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import ToDoItems from "./toDoItems";
 import "./toDolist.css";
 
+const list = []
+
 const initialState = {
-    items : [],
+    items: [...list],
     inputValue: "",
-    inputValueLastName:"",
-    inputDate:"",
-    emailValue:"",
-    address:"",
-    gender:"",
-    genderError:"",
-    emailError:"",
-    firstNameError:"",
-    lastNameError:"",
-    dateError:"",
-    addressError:"",
-    maleImage:'./Foto/generic-male-icon-blue.jpg',
+    inputValueLastName: "",
+    inputDate: "",
+    emailValue: "",
+    address: "",
+    gender: "",
+    genderError: "",
+    emailError: "",
+    firstNameError: "",
+    lastNameError: "",
+    dateError: "",
+    addressError: "",
+    maleImage: './Foto/generic-male-icon-blue.jpg',
+    error: false
+
 }
 
-class ToDoList extends Component{
 
-        state = initialState;
+class ToDoList extends Component {
 
+    state = {
+        ...initialState,
+        visible: 5,
+        listEmpty: true,
+    };
 
-
-   validate = () =>{
-       let firstNameError = "";
-       let lastNameError = "";
-       let dateError = "";
-       let emailError="";
-       let addressError="";
-       let genderError="";
-
-       if(this.state.gender === ""){
-           genderError = "Please enter the Gender";
-       }
-
-       if(!this.state.emailValue.includes("@")){
-          emailError = "Please enter The correct Email";
-
-       }
-
-       if(this.state.address === ""){
-           addressError = "Please enter The Address";
-       }
+    loadMore = () => {
+        this.setState((prevState) => {
+            return {
+                visible: prevState.visible + 5
+            };
+        });
+    }
 
 
+    validate = () => {
+        let firstNameError = "";
+        let lastNameError = "";
+        let dateError = "";
+        let emailError = "";
+        let addressError = "";
+        let genderError = "";
 
-       if(this.state.inputDate === "") {
-           dateError = "Please enter The correct date";
+        if (this.state.gender === "") {
+            genderError = "Please enter the Gender";
+        }
 
-       }
+        if (!this.state.emailValue.includes("@")) {
+            emailError = "Please enter The correct Email";
 
-       if(this.state.inputValue === ""){
-           firstNameError = "Please enter The First Name";
-       }
+        }
 
-
-       if(this.state.inputValueLastName === ""){
-           lastNameError = "Please enter The Last Name";
-       }
-
-       if(firstNameError || lastNameError || dateError || emailError || addressError || genderError){
-           this.setState({firstNameError ,lastNameError, dateError, emailError,addressError, genderError});
-           return false;
-       }
-       return true;
-
-   };
+        if (this.state.address === "") {
+            addressError = "Please enter The Address";
+        }
 
 
+        if (this.state.inputDate === "") {
+            dateError = "Please enter The correct date";
+
+        }
+
+        if (this.state.inputValue === "") {
+            firstNameError = "Please enter The First Name";
+        }
+
+
+        if (this.state.inputValueLastName === "") {
+            lastNameError = "Please enter The Last Name";
+        }
+
+        if (firstNameError || lastNameError || dateError || emailError || addressError || genderError) {
+            this.setState({firstNameError, lastNameError, dateError, emailError, addressError, genderError});
+            return false;
+        }
+        return true;
+
+    };
+    
     addItem = (e) => {
         e.preventDefault();
         const isValidate = this.validate();
 
-        if (isValidate){
-           const newItem = {
-               text : this.state.inputValue,
-               inputValueLast: this.state.inputValueLastName,
-               inputDatum : this.state.inputDate,
-               email: this.state.emailValue,
-               address: this.state.address,
-               gender: this.state.gender,
-               key : Date.now()
-           };
-           this.setState((prevState) => {
-               return {
-                   ...initialState,
-                   items: prevState.items.concat(newItem),
-               };
+        if (isValidate) {
+            const newItem = {
+                text: this.state.inputValue,
+                inputValueLast: this.state.inputValueLastName,
+                inputDatum: this.state.inputDate,
+                email: this.state.emailValue,
+                address: this.state.address,
+                gender: this.state.gender,
+                key: Date.now()
+            };
+            this.setState((prevState) => {
+                return {
+                    ...initialState,
+                    items: prevState.items.concat(newItem),
+                };
             });
-        }else {
+        } else {
             //clear the valid
-            this.setState((prevState) =>({
+            this.setState((prevState) => ({
                 items: prevState.items,
             }));
         }
     }
 
-    inputChangeHandler = (e, key) =>{
-        this.setState({[key] : e.target.value})
+    inputChangeHandler = (e, key) => {
+        this.setState({[key]: e.target.value})
     }
-    inputChangeHandlerByName = (e) =>{
-        this.setState({[e.target.name] : e.target.value})
+    inputChangeHandlerByName = (e) => {
+        this.setState({[e.target.name]: e.target.value})
     }
 
     deleteItem = (key) => {
@@ -122,71 +136,91 @@ class ToDoList extends Component{
 
     }
 
-
-
     render() {
-
-console.log(this.state)
-
-
-        return(
-            <div className="todoListMain">
-                <div className="header">
-                    <form onSubmit={this.addItem} >
-                        <div className="labelValue">
-                            <label className="info">First Name:</label>
-                        </div>
-                        <div className="textValue">
-                            <input className="feldValue" name="inputName"  value={this.state.inputValue} onChange={(e)=>this.inputChangeHandler(e, "inputValue")}/>
-                        </div>
-                        <div className="labelValue" style={{fontSize:'10 px', color: '#ac7339'}}>{this.state.firstNameError}</div>
-                        <div className="labelValue">
-                            <label className="info">Last Name:</label>
-                        </div>
-                        <div className="textValue">
-                            <input className="feldValue" name="inputValueLastName"  value={this.state.inputValueLastName} onChange={this.inputChangeHandlerByName}/>
-                        </div>
-                        <div className="labelValue" style={{fontSize:'10 px', color: '#ac7339'}}>{this.state.lastNameError}</div>
-
-
-
-                        <div className="gender">
-                                <input  type="radio" value="Male" onChange={this.onValueChange}   checked={this.state.gender === "Male"} /> Male
-                                <input  type="radio" value="Female" onChange={this.onValueChange} checked={this.state.gender === "Female"}/> Female
-                        </div>
-                        <div className="labelValue" style={{fontSize:'10 px', color: '#ac7339'}}>{this.state.genderError}</div>
+        console.log(this.state.visible)
+        return (
+            <div>
+                <div className="todoListMain">
+                    <div className="header">
+                        <form onSubmit={this.addItem}>
+                            <div className="labelValue">
+                                <label className="info">First Name:</label>
+                            </div>
+                            <div className="textValue">
+                                <input className="feldValue" name="inputName" value={this.state.inputValue}
+                                       onChange={(e) => this.inputChangeHandler(e, "inputValue")}/>
+                            </div>
+                            <div className="labelValue"
+                                 style={{fontSize: '10 px', color: '#ac7339'}}>{this.state.firstNameError}</div>
+                            <div className="labelValue">
+                                <label className="info">Last Name:</label>
+                            </div>
+                            <div className="textValue">
+                                <input className="feldValue" name="inputValueLastName"
+                                       value={this.state.inputValueLastName} onChange={this.inputChangeHandlerByName}/>
+                            </div>
+                            <div className="labelValue"
+                                 style={{fontSize: '10 px', color: '#ac7339'}}>{this.state.lastNameError}</div>
 
 
-                        <div className="labelValue">
-                            <label className="info">Date of Birth:</label>
-                        </div>
-                        <div className="textValue">
-                            <input className="feldValue" type="date" name="inputName"  value={this.state.inputDate} onChange={(e) =>this.inputChangeHandler(e, "inputDate")}/>
-                        </div>
-                        <div className="labelValue" style={{fontSize:'10 px', color: '#ac7339'}}>{this.state.dateError}</div>
-
-                        <div className="labelValue">
-                            <label className="info">Email:</label>
-                        </div>
-                        <div className="textValue">
-                            <input className="feldValue" name="emailValue"  value={this.state.emailValue} onChange={this.inputChangeHandlerByName}/>
-                        </div>
-                        <div className="labelValue" style={{fontSize:'10 px', color: '#ac7339'}}>{this.state.emailError}</div>
+                            <div className="gender">
+                                <input type="radio" value="Male" onChange={this.onValueChange}
+                                       checked={this.state.gender === "Male"}/> Male
+                                <input type="radio" value="Female" onChange={this.onValueChange}
+                                       checked={this.state.gender === "Female"}/> Female
+                            </div>
+                            <div className="labelValue"
+                                 style={{fontSize: '10 px', color: '#ac7339'}}>{this.state.genderError}</div>
 
 
-                        <div className="labelValue">
-                            <label className="info">Address:</label>
-                        </div>
-                        <div className="textValue">
-                            <input className="feldValue" name="address"  value={this.state.address} onChange={(e) => this.inputChangeHandler(e, "address")}/>
-                        </div>
-                        <div className="labelValue" style={{fontSize:'10 px', color: '#ac7339'}}>{this.state.addressError}</div>
+                            <div className="labelValue">
+                                <label className="info">Date of Birth:</label>
+                            </div>
+                            <div className="textValue">
+                                <input className="feldValue" type="date" name="inputName" value={this.state.inputDate}
+                                       onChange={(e) => this.inputChangeHandler(e, "inputDate")}/>
+                            </div>
+                            <div className="labelValue"
+                                 style={{fontSize: '10 px', color: '#ac7339'}}>{this.state.dateError}</div>
 
-                        <button className="add" type="submit">Add</button>
-                    </form>
+                            <div className="labelValue">
+                                <label className="info">Email:</label>
+                            </div>
+                            <div className="textValue">
+                                <input className="feldValue" name="emailValue" value={this.state.emailValue}
+                                       onChange={this.inputChangeHandlerByName}/>
+                            </div>
+                            <div className="labelValue"
+                                 style={{fontSize: '10 px', color: '#ac7339'}}>{this.state.emailError}</div>
+
+
+                            <div className="labelValue">
+                                <label className="info">Address:</label>
+                            </div>
+                            <div className="textValue">
+                                <input className="feldValue" name="address" value={this.state.address}
+                                       onChange={(e) => this.inputChangeHandler(e, "address")}/>
+                            </div>
+                            <div className="labelValue"
+                                 style={{fontSize: '10 px', color: '#ac7339'}}>{this.state.addressError}</div>
+
+                            <button className="add" type="submit">Add</button>
+                        </form>
+                    </div>
                 </div>
                 <div>
-                     <ul className="theList">{this.state.items.map((item,index) =><ToDoItems key={index} item={item} delete={this.deleteItem} />)}</ul>
+
+                    {this.state.items.length > 0 ? <ul className="theList">
+                        {this.state.items.slice(0, this.state.visible).map((item, index) =>
+                            <ToDoItems key={index} item={item} delete={this.deleteItem}/>)
+                        }
+                        {this.state.visible < this.state.items.length &&
+                        <li>
+                            <button className="loadMore" onClick={this.loadMore} type="button"><span>Load More</span>
+                            </button>
+                        </li>
+                        }
+                    </ul> : <div> no data </div>}
                 </div>
             </div>
         );
