@@ -143,4 +143,37 @@ div.gender {
     right: 0;
 }
 
+div.emptyList {
+    border-style: dotted;
+    margin: 22px 100px;
+    border-color: #FFFFFF;
+    padding: 50px 0px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 47px;
+    margin-right: 192px;
+}
+
+div.addList {
+    border-style: dotted;
+    margin: 22px 100px;
+    border-color: #FFFFFF;
+    padding: 50px 0px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 47px;
+    margin-right: 192px;
+}
+
+div.addList:hover {
+    border-style: dotted;
+    margin: 22px 100px;
+    padding: 50px 0px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 47px;
+    margin-right: 192px;
+    border: 4px dashed black;
+}
+
 

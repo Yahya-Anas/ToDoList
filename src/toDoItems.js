@@ -9,10 +9,6 @@ class toDoItems extends Component {
         isCheck: false,
     }
 
-    // checkedHandler  =() =>{
-    // this.setState({isCheck : !this.state.isCheck})
-    // }sadsd
-
     image = (gender) => {
         let imgFile = 'generic-male-icon-blue.jpg';
 
@@ -53,8 +49,6 @@ class toDoItems extends Component {
                 {this.createTasks(toDoEntries)}
 
             </li>
-
-
         );
     }
 
